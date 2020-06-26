@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="App.Metrics.App.All" Version="4.*" />
+    <PackageReference Include="App.Metrics.Reporting.Console" Version="4.*" />
+    <PackageReference Include="App.Metrics.Reporting.InfluxDB" Version="4.*" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.*" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.*" />
+    <PackageReference Include="NServiceBus" Version="7.*" />
+    <PackageReference Include="NServiceBus.Extensions.Hosting" Version="1.*" />
+    <PackageReference Include="NServiceBus.Newtonsoft.Json" Version="2.*" />
+    <PackageReference Include="NServiceBus.MSDependencyInjection" Version="0.1.4" />
+    <PackageReference Include="ServiceControl.Contracts" Version="1.*" />
+  </ItemGroup>
+</Project>
