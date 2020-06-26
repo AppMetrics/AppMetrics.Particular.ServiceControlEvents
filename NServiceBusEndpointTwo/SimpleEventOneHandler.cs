@@ -1,14 +1,14 @@
-﻿namespace NServiceBusEndpointTwo
-{
-    using System;
-    using System.Threading.Tasks;
-    using NServiceBus;
-    using NServiceBus.Logging;
-    using NServiceBusEndpoint;
+﻿using System;
+using System.Threading.Tasks;
+using NServiceBus;
+using NServiceBus.Logging;
+using NServiceBusEndpoint;
 
+namespace NServiceBusEndpointTwo
+{
     public class SimpleEventOneHandler : IHandleMessages<SimpleEventOne>
     {
-        static ILog log = LogManager.GetLogger<SimpleEventOneHandler>();
+        static readonly ILog log = LogManager.GetLogger<SimpleEventOneHandler>();
 
         public Task Handle(SimpleEventOne message, IMessageHandlerContext context)
         {

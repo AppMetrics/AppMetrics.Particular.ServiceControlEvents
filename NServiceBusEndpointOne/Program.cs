@@ -1,10 +1,10 @@
-﻿namespace NServiceBusEndpointOne
-{
-    using System;
-    using System.Threading.Tasks;
-    using NServiceBus;
-    using NServiceBusEndpoint;
+﻿using System;
+using System.Threading.Tasks;
+using NServiceBus;
+using NServiceBusEndpoint;
 
+namespace NServiceBusEndpointOne
+{
     class Program
     {
         const string EndpointName = "NServiceBusEndpointOne";
@@ -17,6 +17,7 @@
             endpointConfiguration.UseSerialization<NewtonsoftSerializer>();
             endpointConfiguration.EnableInstallers();
             endpointConfiguration.SendFailedMessagesTo("error");
+            endpointConfiguration.SendHeartbeatTo("Particular.ServiceControl", TimeSpan.FromSeconds(2));
 
             #region DisableRetries
 
@@ -47,10 +48,10 @@
                 await endpointInstance.Send(EndpointName, simpleMessage).ConfigureAwait(false);
                 Console.WriteLine($"Sent a new message with Id = {guid}.");
 
-                var simpleEvent = new SimpleEventOne {Id = guid};
+                var simpleEvent = new SimpleEventOne { Id = guid };
                 await endpointInstance.Publish(simpleEvent).ConfigureAwait(false);
                 Console.WriteLine($"Published a new event with Id = {guid}.");
-                
+
                 Console.WriteLine("Press 'Enter' to send a new message. Press any other key to finish.");
             }
 

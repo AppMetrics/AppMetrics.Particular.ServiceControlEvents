@@ -7,7 +7,7 @@ namespace NServiceBusEndpointTwo
 {
     public class SimpleMessageHandler : IHandleMessages<SimpleMessageTwo>
     {
-        static ILog log = LogManager.GetLogger<SimpleMessageHandler>();
+        static readonly ILog log = LogManager.GetLogger<SimpleMessageHandler>();
 
         public Task Handle(SimpleMessageTwo message, IMessageHandlerContext context)
         {

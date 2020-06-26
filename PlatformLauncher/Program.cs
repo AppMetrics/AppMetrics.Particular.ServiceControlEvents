@@ -1,7 +1,7 @@
-﻿namespace PlatformLauncher
-{
-    using System;
+﻿using System;
 
+namespace PlatformLauncher
+{
     class Program
     {
         static void Main(string[] args)

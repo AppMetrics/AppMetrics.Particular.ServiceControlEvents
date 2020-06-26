@@ -8,24 +8,24 @@ using NServiceBus;
 class Program
 {
     const string EndpointName = "EndpointsMonitor";
-    
+
     static async Task Main(string[] args)
     {
         Console.Title = EndpointName;
 
-        var host = Host
-            .CreateDefaultBuilder(args)
-            .ConfigureMetricsWithDefaults(builder =>
+        var host = Host.CreateDefaultBuilder(args).ConfigureMetricsWithDefaults(
+            builder =>
             {
                 builder.OutputMetrics.AsInfluxDbLineProtocol();
                 builder.Report.ToInfluxDb("http://127.0.0.1:8086", "nservicebus", TimeSpan.FromSeconds(1));
-                builder.Report.ToConsole(options =>
-                {
-                    options.FlushInterval = TimeSpan.FromSeconds(5);
-                    options.MetricsOutputFormatter = new MetricsTextOutputFormatter();
-                });
-            })
-            .UseNServiceBus(context =>
+                builder.Report.ToConsole(
+                    options =>
+                    {
+                        options.FlushInterval = TimeSpan.FromSeconds(5);
+                        options.MetricsOutputFormatter = new MetricsTextOutputFormatter();
+                    });
+            }).UseNServiceBus(
+            context =>
             {
                 var cfg = new EndpointConfiguration(EndpointName);
                 cfg.UseSerialization<NewtonsoftSerializer>();
@@ -44,14 +44,12 @@ class Program
                                type.Namespace != null &&
                                type.Namespace.StartsWith("ServiceControl.Contracts");
                     });
-                    
+
                 return cfg;
-            })
-            .UseConsoleLifetime()
-            .Build();
+            }).UseConsoleLifetime().Build();
 
         await host.StartAsync();
-        
+
         Console.WriteLine("Press any key to finish.");
         Console.ReadKey();
     }
